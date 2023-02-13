@@ -17,14 +17,14 @@ default_name = prog
 default_path = $(exefolder)/$(default_name)
 
 
-all: back
+all: stack
 
 
-front:
-	$(call compile, $(cppfolder)/mainfront.cpp, $(cppfolder)/front.cpp, $(default_path))
+stack:
+	$(call compile, $(cppfolder)/main.cpp, $(cppfolder)/stack.cpp, $(default_path))
 
-back:
-	$(call compile, $(cppfolder)/mainback.cpp, $(cppfolder)/back.cpp, $(default_path))
+stackll:
+	$(call compile, $(cppfolder)/main.cpp, $(cppfolder)/stackll.cpp, $(default_path))
 
 test:
 	$(call compile, $(cppfolder)/test.cpp, , $(default_path))
