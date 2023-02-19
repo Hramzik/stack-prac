@@ -1,3 +1,5 @@
+#ifndef STACKLL_HPP_INCLUDED
+#define STACKLL_HPP_INCLUDED
 
 
 #include <sys\stat.h>
@@ -14,33 +16,43 @@
 
 //-------------------- SETTINGS --------------------
 
-#define  log_file_name "logs.txt"
-
-const double stack_resize_coefficient = 2;
 //--------------------------------------------------
 
 
-#define STACK_POP_RESIZE(x)   stack_resize (x, (size_t) fmin ( ceil ( (double) x->capacity / stack_resize_coefficient), x->capacity - 1) )
-#define STACK_PUSH_RESIZE(x)  stack_resize (x, (size_t) fmax ( ceil ( (double) x->capacity * stack_resize_coefficient), x->capacity + 1) )
 
+typedef struct  Node  {
+
+    void* value;
+    Node* next;
+
+} Node; const size_t NODE_SIZE = sizeof (Node);
 
 
 typedef struct  Stack_structure  {
 
-    Element* elements;
+    Node*    top;
+    size_t   element_size;
     size_t   size;
-    size_t   capacity;
 
 } Stack; const size_t STACK_SIZE = sizeof (Stack);
 
 
 
-Return_code _stack_ctor          (Stack* stack, const char* name, const char* file, const char* func, int line);
-Return_code  stack_dtor          (Stack* stack);
-Return_code _stack_resize        (Stack* stack, size_t new_capacity);
-Return_code  stack_push          (Stack* stack, Element_value new_element_value);
-Element      stack_pop           (Stack* stack, Return_code* return_code_ptr = nullptr);
+Stack*  stack_ctor   (size_t size, size_t element_size);
+Stack*  stack_dtor   (Stack* stack);
+int     stack_push   (Stack* stack, void* buffer);
+int     stack_top    (Stack* stack, void* buffer);
+int     stack_pop    (Stack* stack);
+
+size_t test1 (void);
+size_t test2 (void);
+size_t test3 (void);
+
+void fill_the_stack             (Stack* stack);
+void nine_iterations_transform  (Stack* stack);
+void test2_special              (Stack* stack);
+void test3_special              (Stack* stack);
 
 
-Return_code _stack_fill_with_poison (Stack* stack, size_t from, size_t to);
+#endif
 

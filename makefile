@@ -21,10 +21,10 @@ all: stack
 
 
 stack:
-	$(call compile, $(cppfolder)/main.cpp, $(cppfolder)/stack.cpp, $(default_path))
+	$(call compile, $(cppfolder)/main.cpp,   $(cppfolder)/stack.cpp,   $(default_path))
 
-stackll:
-	$(call compile, $(cppfolder)/main.cpp, $(cppfolder)/stackll.cpp, $(default_path))
+ll:
+	$(call compile, $(cppfolder)/mainll.cpp, $(cppfolder)/stackll.cpp, $(default_path))
 
 test:
 	$(call compile, $(cppfolder)/test.cpp, , $(default_path))

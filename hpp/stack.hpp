@@ -1,3 +1,5 @@
+#ifndef STACK_HPP_INCLUDED
+#define STACK_HPP_INCLUDED
 
 
 #include <sys\stat.h>
@@ -14,9 +16,8 @@
 
 //-------------------- SETTINGS --------------------
 
-#define  log_file_name "logs.txt"
-
 const double stack_resize_coefficient = 2;
+
 //--------------------------------------------------
 
 
@@ -24,7 +25,7 @@ const double stack_resize_coefficient = 2;
 #define STACK_PUSH_RESIZE(x)  stack_resize (x, (size_t) fmax ( ceil ( (double) x->capacity * stack_resize_coefficient), x->capacity + 1) )
 
 
-typedef struct  Stack_structure  {
+typedef struct Stack {
 
     void*  elements;
     size_t element_size;
@@ -40,6 +41,17 @@ Stack*  stack_ctor   (size_t size, size_t element_size);
 Stack*  stack_dtor   (Stack* stack);
 int     stack_resize (Stack* stack, size_t new_capacity);
 int     stack_push   (Stack* stack, void* buffer);
+int     stack_top    (Stack* stack, void* buffer);
 int     stack_pop    (Stack* stack);
 
+size_t test1 (void);
+size_t test2 (void);
+size_t test3 (void);
 
+void fill_the_stack             (Stack* stack);
+void nine_iterations_transform  (Stack* stack);
+void test2_special              (Stack* stack);
+void test3_special              (Stack* stack);
+
+
+#endif

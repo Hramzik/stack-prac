@@ -6,10 +6,10 @@
 
 Stack*  stack_ctor  (size_t size, size_t element_size) {
 
-    Stack* stack = (Stack*) calloc (STACK_SIZE);
+    Stack* stack = (Stack*) calloc (STACK_SIZE, 1);
 
 
-    stack->elements = (void*) calloc (size * element_size);
+    stack->elements = (void*) calloc (size * element_size, 1);
     stack->element_size = element_size;
 
     stack->size     = 0;
@@ -76,7 +76,19 @@ int  stack_push  (Stack* stack, void* buffer) {
 
 
     stack->size += 1;
-    memcpy (&stack->elements [stack->size - 1], buffer, stack->element_size);
+    memcpy ((char*) stack->elements + (stack->size - 1) * (stack->element_size), buffer, stack->element_size);
+
+
+    return 0;
+}
+
+
+int  stack_top  (Stack* stack, void* buffer) {
+
+    assert (stack);
+
+
+    memcpy (buffer, (char*) stack->elements + (stack->size - 1) * (stack->element_size), stack->element_size);
 
 
     return 0;
@@ -107,4 +119,7 @@ int  stack_pop  (Stack* stack) {
 
     return 0;
 }
+
+
+#include "tests.cpp"
 
